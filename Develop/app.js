@@ -19,13 +19,13 @@ const employees = [];
 
 function init(){
     startHtml();
-    addPerson();
+    addEmployee();
 }
 
-function addPerson(){
+function addEmployee(){
     //need to prompt questions about team member to add
     inquirer.prompt([{
-        message: "What is member's name?",
+        message: "What is employee's name?",
         name: "name"
     },
     {
@@ -39,13 +39,36 @@ function addPerson(){
         name: "role"
     },
     {
-        message: "What is team member's email?",
+        message: "What is employee's email?",
         name: "email"
     },
     {
-        message:"What is team member's ID?",
+        message:"What is employee's ID?",
         name: "id"
     }])
+
+    .then(function({roleData, members}) {
+        let newMem;
+        if (role === "Intern") {
+            newMem = new Intern(name, id, roleData);
+        }
+        else if (role === "Engineer") {
+            newMem = new Engineer(name, id, roleData);
+        }
+        else {
+            newMem = new Manager(name, id, roleData);
+        }
+        employees.push(newMem);
+        addHtml(newMem)
+        .then(function(){
+            if (members === "yes"){
+                addEmployee();
+            }
+            else{
+                finishHtml();
+            }
+        });
+    });
 
 }
 // After the user has input all employees desired, call the `render` function (required
@@ -67,3 +90,4 @@ function addPerson(){
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+    //Classes have been added
