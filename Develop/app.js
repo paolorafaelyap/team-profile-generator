@@ -49,6 +49,7 @@ function addEmployee(){
         name: "id"
     }])
     .then(function({name, role, id, email}){
+        //determines what type of card to use, depending on the role of team member
         let roleData = "";
         if (role === "Intern"){
             roleData = "school name";
@@ -87,6 +88,7 @@ function addEmployee(){
         employees.push(newMem);
         addHtml(newMem)
         .then(function(){
+            //determines how many cards are created in one HTML file
             if (members === "yes"){
                 addEmployee();
             }
