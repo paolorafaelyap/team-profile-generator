@@ -48,6 +48,30 @@ function addEmployee(){
         message:"What is employee's ID?",
         name: "id"
     }])
+    .then(function({name, role, id, email}){
+        let roleData = "";
+        if (role === "Intern"){
+            roleData = "school name";
+        }
+        else if (role === "Engineer"){
+            roleData = "GitHub username"
+        }
+        else {
+            roleData = "office number"
+        }
+        inquirer.prompt([{
+            message: `Type employee's ${roleData}`,
+            name: "roleData"
+        },
+    {
+        type: "list",
+        message: "Add more members?",
+        choices: [
+            "yes",
+            "no"
+        ],
+        name:"employees"
+    }])
 
     .then(function({roleData, members}) {
         let newMem;
@@ -72,6 +96,7 @@ function addEmployee(){
         });
     });
 
+  });
 }
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -170,10 +195,8 @@ function addHtml(employee)
             </div>
             </div>`
         }
-    })
-}
 
-console.log("adding team member");
+console.log("adding employee");
 fs.appendFile("./output/team.html", data, function (err)
 {
     if (err)
@@ -182,6 +205,8 @@ fs.appendFile("./output/team.html", data, function (err)
     };
     return resolve();
 });
+});
+}
 
 function finishHtml() 
 {
