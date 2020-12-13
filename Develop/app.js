@@ -74,7 +74,27 @@ function addEmployee(){
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
-
+function addHtml(employee) {
+    return new Promise(function(resolve, reject){
+        const name = employee.getName();
+        const role = employee.getRole();
+        const id = employee.getId();
+        const email = employee.getEmail();
+        let data = "";
+        if (role === "Intern"){
+            //if the person is an intern, get the school info
+            const school = employee.getSchool();
+        }
+        else if (role === "Engineer"){
+            //if person is engineer, get the GitHub info
+            const gitHub = employee.getGithub();
+        }
+        else{
+            //if manager, get office number info
+            const officeNum = employee.getOfficeNum();
+        }
+    })
+}
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
